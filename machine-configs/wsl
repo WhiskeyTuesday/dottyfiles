@@ -1,0 +1,16 @@
+# Machine-specific configuration for ubuntu on wsl on windows 10
+
+# If $TMUX not set (not in a tmux session), and tmux is installed, exec tmux
+if [ -z $TMUX ] ; then
+    if [ -n "command -v tmux" ] ; then
+         exec tmux
+    else
+        echo "tmux not installed"
+    fi
+fi
+
+# run vim and then exit to sync tmuxline to vim statusline
+vim +qall
+
+# go home
+cd
