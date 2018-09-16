@@ -13,12 +13,16 @@ Plugin 'vim-airline/vim-airline-themes' " Themes for above
 Plugin 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
 Plugin 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
 Plugin 'takac/vim-hardtime' " Time to break some habits!
-Plugin 'tmux-plugins/vim-tmux-focus-events' " Restores onFocus events lost when using tmux
+Plugin 'tmux-plugins/vim-tmux-focus-events' " Fixes onFocus events lost by tmux
 Plugin 'tmux-plugins/vim-tmux' " Syntax highlighting (++) for .tmux.conf
-Plugin 'airblade/vim-gitgutter' " Track git-diff status of buffer lines in real time
+Plugin 'airblade/vim-gitgutter' " Track git-diff of lines in real time
 Plugin 'tpope/vim-fugitive' " Git-wrapper for Vim
 Plugin 'tpope/vim-scriptease' " A vim plugin for making vim plugins
 Plugin 'yuratomo/w3m.vim' " A w3m-based browser inside vim
+Plugin 'jparise/vim-graphql' " GraphQL file detection, syntax hl, and indenting
+Plugin 'pangloss/vim-javascript' " Better JS highlighting and indenting
+Plugin 'luochen1990/rainbow' " An amazing technicolor dreamcoat for parens
+
 call vundle#end()
 "
 " Display options
@@ -40,10 +44,11 @@ set laststatus=2 " Forces display of status bar
 set lazyredraw " Disables screen redraws during macros - good for SSH latency I'd assume
 set updatetime=250 " redraws screen 4/sec instead of every 4 seconds
 set ttimeoutlen=40 " stops delay exiting to normal mode
+let g:rainbow_active = 1 " Turns on rainbow parens
 "
 " Vim-Airline options
 let g:airline_powerline_fonts = 1
-let g:airline_theme='bubblegum'
+let g:airline_theme='molokai'
 "
 " Editor options
 let g:hardtime_default_on = 0 " Auto-enable vim-hardtime
@@ -62,3 +67,6 @@ set shiftwidth=4 expandtab " Set 'soft' tabbing. So I can HIT Tab but GET 4 spac
 
 " Gitgutter configuration
 let g:gitgutter_max_signs = 2000 " For refactoring a certain java codebase, reduce for better performance
+
+" vim-javascript options
+let g:javascript_plugin_flow = 1 " Enable highlighting for flow

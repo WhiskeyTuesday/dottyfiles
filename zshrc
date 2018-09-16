@@ -23,5 +23,11 @@ alias v='vim'
 alias vr='vim -R'
 
 # rbEnv stuff
-export PATH="$HOME/.rbenv/bin:$PATH" # add rubyenv to the path
-eval "$(rbenv init -)"
+export PATH="$HOME/.rbenv/bin:$PATH"
+[ -f $HOMW/.rbenv/bin/rbenv ] && eval "$(rbenv init -)"
+
+# Haskell
+export PATH="$HOME/.local.bin:$PATH"
+
+# NPM
+export PATH="$HOME/.npm-packages-g/bin:$PATH"
