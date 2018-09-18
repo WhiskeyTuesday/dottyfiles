@@ -22,6 +22,9 @@ alias gd='git diff'
 alias v='vim'
 alias vr='vim -R'
 
+# Other aliases
+alias l="ls -l"
+
 # rbEnv stuff
 export PATH="$HOME/.rbenv/bin:$PATH"
 [ -f $HOMW/.rbenv/bin/rbenv ] && eval "$(rbenv init -)"
@@ -31,3 +34,6 @@ export PATH="$HOME/.local.bin:$PATH"
 
 # NPM
 export PATH="$HOME/.npm-packages-g/bin:$PATH"
+
+# Thefuck
+eval $(thefuck --alias)
