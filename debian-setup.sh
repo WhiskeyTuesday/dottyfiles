@@ -10,12 +10,14 @@ sudo apt-get -y update >> apt-log
 sudo apt-get -y dist-upgrade >> apt-log
 
 echo 'Installing tools'
-sudo apt-get install >> apt-log  \
-vim                              \
-tmux                             \
-zsh                              \
-w3m                              \
-links                            \
+sudo apt-get -y install >> apt-log  \
+htop                                \
+curl                                \
+vim            	                    \
+tmux                                \
+zsh                                 \
+w3m                                 \
+links                               \
 tree
 
 echo 'Linking dotfiles'
