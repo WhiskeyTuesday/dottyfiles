@@ -33,6 +33,7 @@ echo 'Intalling vundle'
 git clone https://github.com/VundleVim/Vundle.vim.git ~/.vim/bundle/Vundle.vim
 
 echo 'Creating promptline.sh'
-vim +PluginInstall +"PromptlineSnapshot ~/.promptline.sh airline" +qall
+vim +PluginInstall +qall
+vim +"PromptlineSnapshot ~/.promptline.sh airline" +qall
 
 echo "Ta-ta for now! Don't forget chsh zsh \& .machineconf if applicable."
