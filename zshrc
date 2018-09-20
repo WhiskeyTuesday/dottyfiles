@@ -27,7 +27,7 @@ alias l="ls -l"
 
 # rbEnv stuff
 export PATH="$HOME/.rbenv/bin:$PATH"
-[ -f $HOMW/.rbenv/bin/rbenv ] && eval "$(rbenv init -)"
+[ -f $HOME/.rbenv/bin/rbenv ] && eval "$(rbenv init -)"
 
 # Haskell
 export PATH="$HOME/.local.bin:$PATH"
