@@ -45,6 +45,7 @@ set lazyredraw " Disables screen redraws during macros - good for SSH latency I'
 set updatetime=250 " redraws screen 4/sec instead of every 4 seconds
 set ttimeoutlen=40 " stops delay exiting to normal mode
 let g:rainbow_active = 1 " Turns on rainbow parens
+set background=dark " Because TMUX doesn't support terminfo bce
 "
 " Vim-Airline options
 let g:airline_powerline_fonts = 1
