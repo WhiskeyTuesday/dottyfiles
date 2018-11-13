@@ -22,26 +22,25 @@ Plugin 'yuratomo/w3m.vim' " A w3m-based browser inside vim
 Plugin 'jparise/vim-graphql' " GraphQL file detection, syntax hl, and indenting
 Plugin 'pangloss/vim-javascript' " Better JS highlighting and indenting
 Plugin 'luochen1990/rainbow' " An amazing technicolor dreamcoat for parens
+Plugin 'w0rp/ale'
 
 call vundle#end()
 "
 " Display options
 filetype on
-autocmd BufNewFile,BufReadPost *.md set filetype=markdown "Forces .md to be markdown always
+autocmd BufNewFile,BufReadPost *.md set filetype=markdown "Forces .md = markdown
 set nu " Turn on line numbering along left side
 set scrolloff=2 " Show two lines above or below cursor when at edge of screen
-set showmode " Display current mode, I think this may be default behaviour, but in case of old installs/vi I guess
 set linebreak " Line wrapping that doesn't split words
-set showcmd " Display command line, again, afaik default behaviour
-set title " Show name of working file. Same deal as above re: defaults
-set showmatch " Highlight matching bracket, parenthesis, etc. ; Same as above re: defaults
+set title " Show name of working file.
+set showmatch " Highlight matching bracket, parenthesis, etc.
 set matchpairs+=<:> " showmatch doesn't include < and > by default apparently
 set wildmenu " Enables tab-complete for vim commands
 syntax on " turns on colour syntax highlighting
 set hlsearch " highlights searchterms in text
 set incsearch " highlights search while searching
 set laststatus=2 " Forces display of status bar
-set lazyredraw " Disables screen redraws during macros - good for SSH latency I'd assume
+set lazyredraw " Disables screen redraws during macros
 set updatetime=250 " redraws screen 4/sec instead of every 4 seconds
 set ttimeoutlen=40 " stops delay exiting to normal mode
 let g:rainbow_active = 1 " Turns on rainbow parens
@@ -53,11 +52,11 @@ let g:airline_theme='molokai'
 "
 " Editor options
 let g:hardtime_default_on = 0 " Auto-enable vim-hardtime
-set backspace=indent,eol,start " Allow backspace over any and all characters - had some issues without this in cygwin vim iirc
+set backspace=indent,eol,start " needed for cygwin vim iirc
 set ignorecase " Case-insensitive searching
-  set smartcase " Unless I *USE* a capital in the search intentionally
+  set smartcase " Unless I use a capital in the search intentionally
 set smartindent " Use indent sizes used in document at hand
-set smarttab " Also recommended for better tab indenting, I don't exactly know what this does personally.
+set smarttab " Also recommended for better tab indenting
 set magic " Makes vim's regex search patterns line up with grep's
 set confirm " Prompts when :w, :q. :wq fail. AFAIK default behaviour
 set viminfo='20,\"500 " Copies clipboard registers to .viminfo on quit
