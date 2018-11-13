@@ -62,11 +62,8 @@ set confirm " Prompts when :w, :q. :wq fail. AFAIK default behaviour
 set viminfo='20,\"500 " Copies clipboard registers to .viminfo on quit
 set hidden " Remembers undo history after quitting
 set history=50 " MOAR UNDO LEVELS!
-set tabstop=4 " Show tabs as 4-space indentation (in case the code is Richard's or something.)
-set shiftwidth=4 expandtab " Set 'soft' tabbing. So I can HIT Tab but GET 4 spaces.
-
-" Gitgutter configuration
-let g:gitgutter_max_signs = 2000 " For refactoring a certain java codebase, reduce for better performance
+set tabstop=2 " Show tabs as 4-space indentation
+set shiftwidth=2 expandtab " 'soft tabbing' - Hit TAB but GET 4 spaces
 
 " vim-javascript options
 let g:javascript_plugin_flow = 1 " Enable highlighting for flow
