@@ -23,7 +23,9 @@ alias v='vim'
 alias vr='vim -R'
 
 # Other aliases
-alias l="ls -l"
+alias ll="ls -l"
+alias cls="clear&&ls"
+alias ccd="clear&&cd"
 
 # rbEnv stuff
 export PATH="$HOME/.rbenv/bin:$PATH"
