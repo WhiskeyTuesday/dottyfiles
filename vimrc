@@ -10,7 +10,7 @@ Plugin 'sudar/vim-arduino-syntax' " Syntax highlighting for arduino-cpp
 Plugin 'mcchrish/fountain.vim' " Syntac highlighting for fountain
 Plugin 'vim-airline/vim-airline' " Vim statusbar
 Plugin 'vim-airline/vim-airline-themes' " Themes for above
-Plugin 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
+" Plugin 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
 Plugin 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
 Plugin 'takac/vim-hardtime' " Time to break some habits!
 Plugin 'tmux-plugins/vim-tmux-focus-events' " Fixes onFocus events lost by tmux
@@ -21,9 +21,10 @@ Plugin 'tpope/vim-scriptease' " A vim plugin for making vim plugins
 Plugin 'yuratomo/w3m.vim' " A w3m-based browser inside vim
 Plugin 'jparise/vim-graphql' " GraphQL file detection, syntax hl, and indenting
 Plugin 'pangloss/vim-javascript' " Better JS highlighting and indenting
+Plugin 'mxw/vim-jsx' " JSX highlighting and indentation
+Plugin 'chrisbra/Recover.vim' " diff recovery prompt
 Plugin 'luochen1990/rainbow' " An amazing technicolor dreamcoat for parens
-Plugin 'w0rp/ale'
-
+Plugin 'w0rp/ale' " Lint isn't just for dryers
 call vundle#end()
 "
 " Display options
@@ -67,3 +68,13 @@ set shiftwidth=2 expandtab " 'soft tabbing' - Hit TAB but GET 4 spaces
 
 " vim-javascript options
 let g:javascript_plugin_flow = 1 " Enable highlighting for flow
+
+" ALE options
+let g:ale_sign_column_always = 1 " Always show ALE gutter
+
+" gitgutter options
+if exists('&signcolumn')  " Vim 7.4.2201
+  set signcolumn=yes
+else
+  let g:gitgutter_sign_column_always = 1
+endif
