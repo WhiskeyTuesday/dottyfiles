@@ -5,9 +5,9 @@
 
 set -e # this tells the shell to exit if any simple commands fail
 
-echo 'Performing update and dist-upgrade'
+echo 'Performing update and upgrade'
 sudo apt-get -y update >> apt-log
-sudo apt-get -y dist-upgrade >> apt-log
+sudo apt-get -y upgrade >> apt-log
 
 echo 'Installing tools'
 sudo apt-get -y install >> apt-log  \
