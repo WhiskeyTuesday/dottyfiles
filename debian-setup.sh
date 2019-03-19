@@ -15,6 +15,7 @@ htop                                \
 curl                                \
 vim            	                    \
 tmux                                \
+fish                                \
 zsh                                 \
 w3m                                 \
 links                               \
@@ -24,9 +25,12 @@ echo 'Linking dotfiles'
 [ -f zshrc ] && ln -fs "$(pwd)/zshrc" ~/.zshrc
 [ -f vimrc ] && ln -fs "$(pwd)/vimrc" ~/.vimrc
 [ -f tmux.conf ] && ln -fs "$(pwd)/tmux.conf" ~/.tmux.conf
+[ -f config.fish] && ln -fs "$(pwd)/config.fish" ~/.config/fish/config.fish
 
-# This file not in public repo, contains personal information
-[ -d secretconf ] && ln -fs "$(pwd)/secretconf/secretconf" ~/.secretconf
+# These files are not in the public repo, contain personal information
+[ -d secretconf ] &&
+  ln -fs "$(pwd)/secretconf/secretconf" ~/.secretconf &&
+  ln -fs "$(pwd)/secretconf/secretconf.fish" ~/.secretconf.fish
 
 echo 'Intalling vundle'
 [ ! -d ~/.vim/bundle/Vundle.vim ] && \
