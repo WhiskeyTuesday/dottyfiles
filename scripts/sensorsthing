@@ -1,0 +1,1 @@
+watch -t -n 5 "sensors -u | grep -E 'temp1_input' -m 1 && sensors -u | grep -E 'fan1_'"

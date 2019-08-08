@@ -1,5 +1,6 @@
 set nocompatible " be iMproved!
 "
+set shell=/bin/bash
 filetype off " required for Vundle, turned back on again later
 set rtp+=~/.vim/bundle/Vundle.vim
 call vundle#begin()
@@ -25,6 +26,8 @@ Plugin 'mxw/vim-jsx' " JSX highlighting and indentation
 Plugin 'chrisbra/Recover.vim' " diff recovery prompt
 Plugin 'luochen1990/rainbow' " An amazing technicolor dreamcoat for parens
 Plugin 'w0rp/ale' " Lint isn't just for dryers
+Plugin 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
+Plugin 'morhetz/gruvbox'
 call vundle#end()
 "
 " Display options
@@ -45,11 +48,24 @@ set lazyredraw " Disables screen redraws during macros
 set updatetime=250 " redraws screen 4/sec instead of every 4 seconds
 set ttimeoutlen=40 " stops delay exiting to normal mode
 let g:rainbow_active = 1 " Turns on rainbow parens
-set background=dark " Because TMUX doesn't support terminfo bce
+"
+" Coloring / theming
+if exists('+termguicolors') " I don't know exactly why but this fixes
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " termgui colors and tmux's
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " lack of support for bce
+  set termguicolors " It's copied from a github gist
+endif
+"
+colorscheme gruvbox
+let g:gruvbox_contrast_light='hard'
+let g:gruvbox_contrast_dark='hard'
+set background=dark
+command Drk execute "set background=dark"
+command Lgt execute "set background=light"
 "
 " Vim-Airline options
 let g:airline_powerline_fonts = 1
-let g:airline_theme='molokai'
+let g:airline_theme='gruvbox'
 "
 " Editor options
 let g:hardtime_default_on = 0 " Auto-enable vim-hardtime
@@ -65,6 +81,7 @@ set hidden " Remembers undo history after quitting
 set history=50 " MOAR UNDO LEVELS!
 set tabstop=2 " Show tabs as 4-space indentation
 set shiftwidth=2 expandtab " 'soft tabbing' - Hit TAB but GET 4 spaces
+set foldopen -=hor " stop opening folds when I hit L
 
 " vim-javascript options
 let g:javascript_plugin_flow = 1 " Enable highlighting for flow
