@@ -25,7 +25,7 @@ echo 'Linking dotfiles'
 [ -f zshrc ] && ln -fs "$(pwd)/zshrc" ~/.zshrc
 [ -f vimrc ] && ln -fs "$(pwd)/vimrc" ~/.vimrc
 [ -f tmux.conf ] && ln -fs "$(pwd)/tmux.conf" ~/.tmux.conf
-[ -f config.fish] && ln -fs "$(pwd)/config.fish" ~/.config/fish/config.fish
+[ -f config.fish ] && ln -fs "$(pwd)/config.fish" ~/.config/fish/config.fish
 
 # These files are not in the public repo, contain personal information
 [ -d secretconf ] &&
