@@ -19,7 +19,10 @@ fish                                \
 zsh                                 \
 w3m                                 \
 links                               \
-tree
+tree                                \
+exfat-fuse                          \
+p7zip                               \
+npm
 
 echo 'Linking dotfiles'
 [ -f zshrc ] && ln -fs "$(pwd)/zshrc" ~/.zshrc
@@ -40,4 +43,4 @@ echo 'Creating promptline.sh'
 vim +PluginInstall +qall
 vim +"PromptlineSnapshot ~/.promptline.sh airline" +qall
 
-echo "Ta-ta for now! Don't forget chsh zsh \& .machineconf if applicable."
+echo "Ta-ta for now! Don't forget chsh \& .machineconf if applicable."
