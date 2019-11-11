@@ -22,7 +22,7 @@ links                               \
 tree                                \
 exfat-fuse                          \
 p7zip                               \
-npm
+youtube-dl
 
 echo 'Linking dotfiles'
 [ -f zshrc ] && ln -fs "$(pwd)/zshrc" ~/.zshrc
