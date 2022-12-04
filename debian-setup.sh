@@ -15,6 +15,7 @@ htop                                \
 nvtop                               \
 git                                 \
 snapd                               \
+procps                              \
 wget                                \
 curl                                \
 vim            	                    \
@@ -35,7 +36,8 @@ progress                            \
 vlc                                 \
 cloc                                \
 firefox                             \
-chromium-bsu                        \
+discord                             \
+insomnia                            \
 wordgrinder                         \
 bat                                 \
 ripgrep                             \
@@ -75,13 +77,15 @@ echo 'installing flutter'
 sudo snap install flutter --classic
 sudo apt-get install clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev -y
 
-
 echo 'installing fvm'
 brew tap leoafarias/fvm
 brew install fvm
 
 echo 'installing n (an alternative node version manager)'
 curl -L https://bit.ly/n-install | bash
+
+echo 'installing spotify'
+sudo snap install spotify
 
 echo "Ta-ta for now! Don't forget chsh \& .machineconf if applicable."
 echo "Android studio can be installed from https://developer.android.com/studio"
