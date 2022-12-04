@@ -27,11 +27,14 @@ Plugin 'chrisbra/Recover.vim' " diff recovery prompt
 Plugin 'luochen1990/rainbow' " An amazing technicolor dreamcoat for parens
 Plugin 'w0rp/ale' " Lint isn't just for dryers
 Plugin 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
+Plugin 'rescript-lang/vim-rescript'
 Plugin 'morhetz/gruvbox'
-call vundle#end()
+Plugin 'laddge/InsEmoji.vim' " Emoji
 "
-" Display options
+call vundle#end()
 filetype on
+
+" Display options
 autocmd BufNewFile,BufReadPost *.md set filetype=markdown "Forces .md = markdown
 set nu " Turn on line numbering along left side
 set scrolloff=2 " Show two lines above or below cursor when at edge of screen
@@ -50,10 +53,12 @@ set ttimeoutlen=40 " stops delay exiting to normal mode
 let g:rainbow_active = 1 " Turns on rainbow parens
 "
 " Coloring / theming
-if exists('+termguicolors') " I don't know exactly why but this fixes
-  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum" " termgui colors and tmux's
-  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum" " lack of support for bce
-  set termguicolors " It's copied from a github gist
+" I don't quite understand how but this block makes vim work properly
+" with truecolor terminals (as opposed to only 256-color supporting ones)
+if exists('+termguicolors')
+  let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
+  let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
+ set termguicolors
 endif
 "
 colorscheme gruvbox
@@ -68,7 +73,7 @@ let g:airline_powerline_fonts = 1
 let g:airline_theme='gruvbox'
 "
 " Editor options
-let g:hardtime_default_on = 0 " Auto-enable vim-hardtime
+let g:hardtime_default_on = 0 " Auto-enable vim-hardtime (if set to 1)
 set backspace=indent,eol,start " needed for cygwin vim iirc
 set ignorecase " Case-insensitive searching
   set smartcase " Unless I use a capital in the search intentionally
@@ -78,19 +83,16 @@ set magic " Makes vim's regex search patterns line up with grep's
 set confirm " Prompts when :w, :q. :wq fail. AFAIK default behaviour
 set viminfo='20,\"500 " Copies clipboard registers to .viminfo on quit
 set hidden " Remembers undo history after quitting
-set history=50 " MOAR UNDO LEVELS!
-set tabstop=2 " Show tabs as 4-space indentation
-set shiftwidth=2 expandtab " 'soft tabbing' - Hit TAB but GET 4 spaces
-set foldopen -=hor " stop opening folds when I hit L
-
-" vim-javascript options
-let g:javascript_plugin_flow = 1 " Enable highlighting for flow
+set history=100 " MOAR UNDO LEVELS!
+set tabstop=2 " Show tabs as 2-space indentation
+set shiftwidth=2 expandtab " 'soft tabbing' - Hit TAB but GET 2 spaces
+set foldopen -=hor " stop opening folds when I hit 'L'
 
 " ALE options
 let g:ale_sign_column_always = 1 " Always show ALE gutter
 
 " gitgutter options
-if exists('&signcolumn')  " Vim 7.4.2201
+if exists('&signcolumn')  " Vim > 7.4.2201
   set signcolumn=yes
 else
   let g:gitgutter_sign_column_always = 1

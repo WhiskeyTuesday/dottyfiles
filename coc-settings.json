@@ -1,0 +1,14 @@
+{
+  "languageserver": {
+    "rescript": {
+      "enable": true,
+      "module": "~/.local/share/nvim/plugged/vim-rescript/server/out/server.js",
+      "args": ["--node-ipc"],
+      "filetypes": ["rescript"],
+      "rootPatterns": ["bsconfig.json"]
+    }
+  },
+  "javascript.suggestionActions.enabled": false,
+  "javascript.suggest.enabled": false,
+  "javascript.validate.enable": false
+}
