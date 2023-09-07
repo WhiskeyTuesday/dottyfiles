@@ -1,11 +1,4 @@
-"set nocompatible " be iMproved!
-"
-"set shell=/bin/bash
-"filetype off " required for Vundle, turned back on again later
-"set rtp+=~/.vim/bundle/Vundle.vim
-"call vundle#begin()
-"
-" Vundle plugins
+" Vundle plugins (from my original vim config)
 "Plugin 'VundleVim/Vundle.vim' " Tells Vundle to Vundle Vundle (Vundle)
 "Plugin 'sudar/vim-arduino-syntax' " Syntax highlighting for arduino-cpp
 "Plugin 'mcchrish/fountain.vim' " Syntac highlighting for fountain
@@ -27,15 +20,22 @@
 "
 "call vundle#end()
 "filetype on
-"
-" vim-plug?
+
+" vim-plug (for neovim)
 call plug#begin()
 Plug 'rescript-lang/vim-rescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox'
+Plug 'EdenEast/nightfox.nvim'
 Plug 'vim-airline/vim-airline' " Vim statusbar
 Plug 'vim-airline/vim-airline-themes' " Themes for above
 Plug 'jparise/vim-graphql' " GraphQL file detection, syntax hl, and indenting
+Plug 'othree/html5.vim'
+Plug 'evanleck/vim-svelte', {'branch': 'main'}
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
+" :BD to close buffers without closing windows/splits
+Plug 'qpkorr/vim-bufkill', { 'branch': 'master' }
 "Plug 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
 "Plug 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
 call plug#end()
@@ -57,29 +57,25 @@ set lazyredraw " Disables screen redraws during macros
 set updatetime=250 " redraws screen 4/sec instead of every 4 seconds
 set ttimeoutlen=40 " stops delay exiting to normal mode
 let g:rainbow_active = 1 " Turns on rainbow parens
-"
+set colorcolumn=60,80 " Highlights columns 60 and 80
+
+let g:neovide_fullscreen = 1 " Fullscreen when using neovide
+
 " Coloring / theming
-" I don't quite understand how but this block makes vim work properly
-" with truecolor terminals (as opposed to only 256-color supporting ones)
-"if exists('+termguicolors')
-  "let &t_8f = "\<Esc>[38;2;%lu;%lu;%lum"
-  "let &t_8b = "\<Esc>[48;2;%lu;%lu;%lum"
- "set termguicolors
-"endif
-"
-colorscheme gruvbox
-"let g:gruvbox_contrast_light='hard'
-"let g:gruvbox_contrast_dark='hard'
-"set background=dark
-"command Drk execute "set background=dark"
-"command Lgt execute "set background=light"
+command Drk execute "set background=dark"
+command Lgt execute "set background=light"
 command D execute "colorscheme desert"
 command G execute "colorscheme gruvbox"
-""
+command Nf execute "colorscheme nightfox"
+command Tf execute "colorscheme terafox"
+colorscheme terafox
+" font/typeface (for GUIs, neovide in my case)
+set guifont=FantasqueSansMono\ Nerd\ Font:h14 " curly k master race
+
 " Vim-Airline options
 let g:airline_powerline_fonts = 1
 let g:airline_theme='gruvbox'
-"
+
 " Editor options
 "let g:hardtime_default_on = 0 " Auto-enable vim-hardtime (if set to 1)
 set backspace=indent,eol,start " needed for cygwin vim iirc
@@ -91,19 +87,15 @@ set magic " Makes vim's regex search patterns line up with grep's
 set confirm " Prompts when :w, :q. :wq fail. AFAIK default behaviour
 set viminfo='20,\"500 " Copies clipboard registers to .viminfo on quit
 set hidden " Remembers undo history after quitting
-set history=100 " MOAR UNDO LEVELS!
+set history=1000 " MOAR UNDO LEVELS!
 set tabstop=2 " Show tabs as 2-space indentation
 set shiftwidth=2 expandtab " 'soft tabbing' - Hit TAB but GET 2 spaces
 set foldopen -=hor " stop opening folds when I hit 'L'
 
-" gitgutter options
-"if exists('&signcolumn')  " Vim > 7.4.2201
-  "set signcolumn=yes
-"else
-  "let g:gitgutter_sign_column_always = 1
-"endif
+" Custom commands
+cnoreabbrev <expr> T ((getcmdtype() is# ':' && getcmdline() is# 'T')?('NvimTreeToggle'):('T'))
 
-" Set internal encoding of vim, not needed on neovim, since coc.nvim using some
+" Set internal encoding of vim, not needed on neovim, since coc.nvim uses some
 " unicode characters in the file autoload/float.vim
 set encoding=utf-8
 
@@ -113,10 +105,6 @@ set hidden
 " Some servers have issues with backup files, see #649.
 set nobackup
 set nowritebackup
-
-" Having longer updatetime (default is 4000 ms = 4 s) leads to noticeable
-" delays and poor user experience.
-set updatetime=300
 
 " Don't pass messages to |ins-completion-menu|.
 set shortmess+=c
@@ -129,6 +117,8 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
 
 " Use tab for trigger completion with characters ahead and navigate.
 " NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
@@ -155,6 +145,8 @@ endif
 " format on enter, <cr> could be remapped by other vim plugin
 inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
                               \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
+inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
+
 
 " Use `[g` and `]g` to navigate diagnostics
 " Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
@@ -169,6 +161,10 @@ nmap <silent> gr <Plug>(coc-references)
 
 " Use K to show documentation in preview window.
 nnoremap <silent> K :call <SID>show_documentation()<CR>
+
+" use Ctrl-j and Ctrl-k to scroll within the typehint window
+nnoremap coc#float#has_scroll() ? coc#float#scroll(1, 1) : "<C-j>"
+nnoremap coc#float#has_scroll() ? coc#float#scroll(0, 1) : "<C-k>"
 
 function! s:show_documentation()
   if CocAction('hasProvider', 'hover')
@@ -239,7 +235,7 @@ xmap <silent> <C-s> <Plug>(coc-range-select)
 command! -nargs=0 Format :call CocActionAsync('format')
 
 " Add `:Fold` command to fold current buffer.
-command! -nargs=? Fold :call     CocAction('fold', <f-args>)
+" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
 
 " Add `:OR` command for organize imports of the current buffer.
 command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
@@ -266,3 +262,26 @@ nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
 nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
 " Resume latest coc list.
 nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
+
+lua <<EOF
+-- disable netrw at the very start of your init.lua
+vim.g.loaded_netrw = 1
+vim.g.loaded_netrwPlugin = 1
+
+-- set termguicolors to enable highlight groups
+vim.opt.termguicolors = true
+
+-- OR setup with some options
+require("nvim-tree").setup({
+  sort_by = "case_sensitive",
+  view = {
+    width = 30,
+  },
+  renderer = {
+    group_empty = true,
+  },
+  filters = {
+    dotfiles = true,
+  },
+})
+EOF

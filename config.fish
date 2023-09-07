@@ -24,8 +24,7 @@ alias noc 'nordvpn connect'
 alias nos 'nordvpn status'
 alias nod 'nordvpn disconnect'
 
-alias bat 'batcat'
-alias b 'batcat'
+alias b 'bat'
 
 alias fd 'fdfind'
 
@@ -37,6 +36,7 @@ set PATH $PATH $ANDROID_HOME/emulator
 set PATH $PATH $ANDROID_HOME/tools
 set PATH $PATH $ANDROID_HOME/tools/bin
 set PATH $PATH $ANDROID_HOME/platform-tools
+set PATH $PATH $HOME/.local/share/bob/nvim-bin
 
 # Fish settings
 set fish_key_bindings fish_vi_key_bindings
@@ -54,3 +54,17 @@ end
 set -x N_PREFIX "$HOME/n"; contains "$N_PREFIX/bin" $PATH; or set -a PATH "$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
 
 eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
+
+# pnpm
+set -gx PNPM_HOME "/home/ers/.local/share/pnpm"
+set -gx PATH "$PNPM_HOME" $PATH
+# pnpm end
+
+
+# >>> conda initialize >>>
+# !! Contents within this block are managed by 'conda init' !!
+if test -f /home/ers/anaconda3/bin/conda
+    eval /home/ers/anaconda3/bin/conda "shell.fish" "hook" $argv | source
+end
+# <<< conda initialize <<<
+

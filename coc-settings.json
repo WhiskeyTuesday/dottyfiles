@@ -10,5 +10,6 @@
   },
   "javascript.suggestionActions.enabled": false,
   "javascript.suggest.enabled": false,
-  "javascript.validate.enable": false
+  "javascript.validate.enable": false,
+  "svelte.enable-ts-plugin": true
 }
