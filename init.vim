@@ -38,6 +38,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 Plug 'qpkorr/vim-bufkill', { 'branch': 'master' }
 "Plug 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
 "Plug 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
+Plug 'github/copilot.vim'
 call plug#end()
 
 " Display options

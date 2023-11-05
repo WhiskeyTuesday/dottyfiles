@@ -68,3 +68,4 @@ if test -f /home/ers/anaconda3/bin/conda
 end
 # <<< conda initialize <<<
 
+~/.cargo/bin/rtx activate fish | source
