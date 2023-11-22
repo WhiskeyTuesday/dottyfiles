@@ -17,7 +17,7 @@
 "Plugin 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
 "Plugin 'rescript-lang/vim-rescript'
 "Plugin 'laddge/InsEmoji.vim' " Emoji
-"
+
 "call vundle#end()
 "filetype on
 
@@ -25,8 +25,9 @@
 call plug#begin()
 Plug 'rescript-lang/vim-rescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
-Plug 'morhetz/gruvbox'
-Plug 'EdenEast/nightfox.nvim'
+Plug 'morhetz/gruvbox' " Gruvbox theme
+Plug 'xero/miasma.nvim' " Miasma theme
+Plug 'EdenEast/nightfox.nvim' " Nightfox (and terafox) theme
 Plug 'vim-airline/vim-airline' " Vim statusbar
 Plug 'vim-airline/vim-airline-themes' " Themes for above
 Plug 'jparise/vim-graphql' " GraphQL file detection, syntax hl, and indenting
@@ -34,11 +35,11 @@ Plug 'othree/html5.vim'
 Plug 'evanleck/vim-svelte', {'branch': 'main'}
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
-" :BD to close buffers without closing windows/splits
+" allow :BD to close buffers without closing windows/splits
 Plug 'qpkorr/vim-bufkill', { 'branch': 'master' }
+Plug 'github/copilot.vim'
 "Plug 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
 "Plug 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
-Plug 'github/copilot.vim'
 call plug#end()
 
 " Display options
