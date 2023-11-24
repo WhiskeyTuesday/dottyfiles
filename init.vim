@@ -27,6 +27,9 @@ Plug 'rescript-lang/vim-rescript'
 Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox' " Gruvbox theme
 Plug 'xero/miasma.nvim' " Miasma theme
+Plug 'savq/melange-nvim' " Melange theme
+Plug 'Biscuit-Colorscheme/nvim' " Biscuit theme
+Plug 'rebelot/kanagawa.vim' " Kanagawa theme
 Plug 'EdenEast/nightfox.nvim' " Nightfox (and terafox) theme
 Plug 'vim-airline/vim-airline' " Vim statusbar
 Plug 'vim-airline/vim-airline-themes' " Themes for above
