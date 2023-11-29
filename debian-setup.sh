@@ -69,6 +69,7 @@ echo 'Linking dotfiles'
 [ -f config.fish ] && ln -fs "$(pwd)/config.fish" ~/.config/fish/config.fish
 [ -f init.vim ] && ln -fs "$(pwd)/init.vim" ~/.config/nvim/init.vim
 [ -f coc-settings.json ] && ln -fs "$(pwd)/coc-settings.json" ~/.config/nvim/coc-settings.json
+[ -d fish_fns ] && ln -fs "$(pwd)/fish_fns" ~/.config/fish/functions
 
 # These files are not in the public repo, contain personal information
 [ -d secretconf ] &&
@@ -83,7 +84,7 @@ echo 'Installing vim plugins and creating promptline.sh'
 vim +PluginInstall +qall
 vim +"PromptlineSnapshot ~/.promptline.sh airline" +qall
 
-echo 'Installing neovim and plugins'
+echo 'Installing neovim plugins'
 sh -c 'curl -fLo "${XDG_DATA_HOME:-$HOME/.local/share}"/nvim/site/autoload/plug.vim --create-dirs https://raw.githubusercontent.com/junegunn/vim-plug/master/plug.vim'
 nvim +PlugInstall +qall
 
