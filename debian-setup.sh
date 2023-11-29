@@ -92,16 +92,15 @@ echo 'installing brew'
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
 # brew install gcc
 
-echo 'installing flutter'
-# sudo snap install flutter --classic # use fvm to install instead
-# sudo apt-get install build-essential clang cmake ninja-build pkg-config libgtk-3-dev liblzma-dev -y
-
 echo 'installing fvm'
 brew tap leoafarias/fvm
 brew install fvm
 
+# echo 'installing flutter'
+# TODO
+
 echo 'installing n (an alternative node version manager)'
-curl -L https://bit.ly/n-install | bash # use rtx instead?
+curl -L https://bit.ly/n-install | bash # use rtx instead TODO
 
 echo 'installing spotify'
 sudo snap install spotify
