@@ -73,9 +73,10 @@ command D execute "colorscheme desert"
 command G execute "colorscheme gruvbox"
 command Nf execute "colorscheme nightfox"
 command Tf execute "colorscheme terafox"
-colorscheme terafox
+colorscheme biscuit
+
 " font/typeface (for GUIs, neovide in my case)
-set guifont=FantasqueSansMono\ Nerd\ Font:h14 " curly k master race
+set guifont=FantasqueSansM\ Nerd\ Font:h14 " curly k master race
 
 " Vim-Airline options
 let g:airline_powerline_fonts = 1
@@ -102,7 +103,7 @@ cnoreabbrev <expr> T ((getcmdtype() is# ':' && getcmdline() is# 'T')?('NvimTreeT
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim uses some
 " unicode characters in the file autoload/float.vim
-set encoding=utf-8
+set encoding=UTF-8
 
 " TextEdit might fail if hidden is not set.
 set hidden
