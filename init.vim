@@ -14,7 +14,6 @@
 "Plugin 'chrisbra/Recover.vim' " diff recovery prompt
 "Plugin 'luochen1990/rainbow' " An amazing technicolor dreamcoat for parens
 "Plugin 'w0rp/ale' " Lint isn't just for dryers
-"Plugin 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
 "Plugin 'rescript-lang/vim-rescript'
 "Plugin 'laddge/InsEmoji.vim' " Emoji
 
@@ -43,6 +42,7 @@ Plug 'qpkorr/vim-bufkill', { 'branch': 'master' }
 Plug 'github/copilot.vim'
 "Plug 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
 "Plug 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
+Plug 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
 call plug#end()
 
 " Display options
