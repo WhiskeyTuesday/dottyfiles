@@ -1,3 +1,3 @@
 function files --wraps='nautilus . & disown' --description 'alias files nautilus . & disown'
-  nautilus . & disown $argv; 
+  nautilus . & disown $argv;
 end
