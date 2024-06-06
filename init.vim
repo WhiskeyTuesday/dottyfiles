@@ -40,6 +40,7 @@ Plug 'nvim-tree/nvim-web-devicons'
 " allow :BD to close buffers without closing windows/splits
 Plug 'qpkorr/vim-bufkill', { 'branch': 'master' }
 Plug 'github/copilot.vim'
+Plug 'mbbill/undotree' " Undo tree
 "Plug 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
 "Plug 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
 Plug 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
@@ -76,17 +77,17 @@ command Tf execute "colorscheme terafox"
 colorscheme biscuit
 
 " font/typeface (for GUIs, neovide in my case)
-set guifont=FantasqueSansM\ Nerd\ Font:h14 " curly k master race
+set guifont=FantasqueSansM\ Nerd\ Font:h13 " curly k master race
 
 " Vim-Airline options
 let g:airline_powerline_fonts = 1
-let g:airline_theme='gruvbox'
+let g:airline_theme='term'
 
 " Editor options
 "let g:hardtime_default_on = 0 " Auto-enable vim-hardtime (if set to 1)
 set backspace=indent,eol,start " needed for cygwin vim iirc
 set ignorecase " Case-insensitive searching
-  set smartcase " Unless I use a capital in the search intentionally
+set smartcase " Unless I use a capital in the search intentionally
 set smartindent " Use indent sizes used in document at hand
 set smarttab " Also recommended for better tab indenting
 set magic " Makes vim's regex search patterns line up with grep's

@@ -29,6 +29,7 @@ w3m                                 \
 links                               \
 tree                                \
 exfat-fuse                          \
+gcc                                 \
 build-essential                     \
 p7zip-full                          \
 youtube-dl                          \
@@ -57,7 +58,7 @@ wiki-tui          \
 bat               \
 ripgrep           \
 fd-find           \
-rtx-cli
+mise
 
 echo 'Installing stable nvim'
 bob use stable
@@ -90,17 +91,13 @@ nvim +PlugInstall +qall
 
 echo 'installing brew'
 /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
-# brew install gcc
 
-echo 'installing fvm'
-brew tap leoafarias/fvm
-brew install fvm
+#echo 'installing fvm'
+#brew tap leoafarias/fvm
+#brew install fvm
 
 # echo 'installing flutter'
 # TODO
-
-echo 'installing n (an alternative node version manager)'
-curl -L https://bit.ly/n-install | bash # use rtx instead TODO
 
 echo 'installing spotify'
 sudo snap install spotify

@@ -2,10 +2,16 @@
   "languageserver": {
     "rescript": {
       "enable": true,
-      "module": "~/.local/share/nvim/plugged/vim-rescript/server/out/server.js",
+      "module": "~/.local/share/pnpm/nodejs/20.12.0/lib/node_modules/@rescript/language-server/out/cli.js",
       "args": ["--node-ipc"],
       "filetypes": ["rescript"],
-      "rootPatterns": ["bsconfig.json"]
+      "rootPatterns": ["rescript.json", "bsconfig.json"]
+    },
+    "csharp-ls": {
+      "command": "csharp-ls",
+      "module": "~/.dotnet/tools/csharp-ls",
+      "filetypes": ["cs"],
+      "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
     }
   },
   "javascript.suggestionActions.enabled": false,

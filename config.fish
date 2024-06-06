@@ -29,7 +29,7 @@ alias b 'bat'
 alias fd 'fdfind'
 
 # PATH variables
-set PATH $PATH /usr/local/bin
+set PATH /usr/local/bin $PATH # Unmanaged local binaries before all else
 set ANDROID_HOME $HOME/Android/Sdk
 set JAVA_HOME $HOME/android-studio/jre
 set PATH $PATH $ANDROID_HOME/emulator
@@ -37,6 +37,7 @@ set PATH $PATH $ANDROID_HOME/tools
 set PATH $PATH $ANDROID_HOME/tools/bin
 set PATH $PATH $ANDROID_HOME/platform-tools
 set PATH $PATH $HOME/.local/share/bob/nvim-bin
+set PATH $PATH $HOME/.dotnet/tools # .NET Core Global Tools
 
 # Fish settings
 set fish_key_bindings fish_vi_key_bindings
@@ -68,4 +69,4 @@ if test -f /home/ers/anaconda3/bin/conda
     eval /home/ers/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 end
 # <<< conda initialize <<<
-~/.cargo/bin/rtx activate fish | source
+~/.cargo/bin/mise activate fish | source
