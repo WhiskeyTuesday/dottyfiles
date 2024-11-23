@@ -7,6 +7,7 @@
       "filetypes": ["rescript"],
       "rootPatterns": ["rescript.json", "bsconfig.json"]
     },
+
     "csharp-ls": {
       "command": "csharp-ls",
       "module": "~/.dotnet/tools/csharp-ls",
@@ -14,6 +15,7 @@
       "rootPatterns": ["*.csproj", ".vim/", ".git/", ".hg/"]
     }
   },
+
   "javascript.suggestionActions.enabled": false,
   "javascript.suggest.enabled": false,
   "javascript.validate.enable": false,

@@ -1,49 +1,36 @@
-" Vundle plugins (from my original vim config)
-"Plugin 'VundleVim/Vundle.vim' " Tells Vundle to Vundle Vundle (Vundle)
-"Plugin 'sudar/vim-arduino-syntax' " Syntax highlighting for arduino-cpp
-"Plugin 'mcchrish/fountain.vim' " Syntac highlighting for fountain
-"Plugin 'takac/vim-hardtime' " Time to break some habits!
-"Plugin 'tmux-plugins/vim-tmux-focus-events' " Fixes onFocus events lost by tmux
-"Plugin 'tmux-plugins/vim-tmux' " Syntax highlighting (++) for .tmux.conf
-"Plugin 'airblade/vim-gitgutter' " Track git-diff of lines in real time
-"Plugin 'tpope/vim-fugitive' " Git-wrapper for Vim
-"Plugin 'tpope/vim-scriptease' " A vim plugin for making vim plugins
-"Plugin 'yuratomo/w3m.vim' " A w3m-based browser inside vim
-"Plugin 'pangloss/vim-javascript' " Better JS highlighting and indenting
-"Plugin 'mxw/vim-jsx' " JSX highlighting and indentation
-"Plugin 'chrisbra/Recover.vim' " diff recovery prompt
-"Plugin 'luochen1990/rainbow' " An amazing technicolor dreamcoat for parens
-"Plugin 'w0rp/ale' " Lint isn't just for dryers
-"Plugin 'rescript-lang/vim-rescript'
-"Plugin 'laddge/InsEmoji.vim' " Emoji
-
-"call vundle#end()
-"filetype on
-
 " vim-plug (for neovim)
 call plug#begin()
 Plug 'rescript-lang/vim-rescript'
-Plug 'neoclide/coc.nvim', {'branch': 'release'}
 Plug 'morhetz/gruvbox' " Gruvbox theme
 Plug 'xero/miasma.nvim' " Miasma theme
 Plug 'savq/melange-nvim' " Melange theme
 Plug 'Biscuit-Colorscheme/nvim' " Biscuit theme
-Plug 'rebelot/kanagawa.vim' " Kanagawa theme
 Plug 'EdenEast/nightfox.nvim' " Nightfox (and terafox) theme
 Plug 'vim-airline/vim-airline' " Vim statusbar
 Plug 'vim-airline/vim-airline-themes' " Themes for above
 Plug 'jparise/vim-graphql' " GraphQL file detection, syntax hl, and indenting
 Plug 'othree/html5.vim'
-Plug 'evanleck/vim-svelte', {'branch': 'main'}
+Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
 " allow :BD to close buffers without closing windows/splits
 Plug 'qpkorr/vim-bufkill', { 'branch': 'master' }
 Plug 'github/copilot.vim'
 Plug 'mbbill/undotree' " Undo tree
-"Plug 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
-"Plug 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
 Plug 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
+Plug 'neovim/nvim-lspconfig' " https://github.com/neovim/nvim-lspconfig
+" Plug 'edkolev/tmuxline.vim' " Makes the Tmux statusbar match vim-airline
+" Plug 'edkolev/promptline.vim' " Makes the shell prompt match vim-airline
+
+" LSP config and completion
+  Plug 'neovim/nvim-lspconfig'
+  Plug 'hrsh7th/cmp-nvim-lsp'
+  Plug 'hrsh7th/cmp-buffer'
+  Plug 'hrsh7th/cmp-path'
+  Plug 'hrsh7th/cmp-cmdline'
+  Plug 'hrsh7th/nvim-cmp'
+  Plug 'hrsh7th/cmp-vsnip'
+  Plug 'hrsh7th/vim-vsnip'
 call plug#end()
 
 " Display options
@@ -125,152 +112,14 @@ else
   set signcolumn=yes
 endif
 
-command! -nargs=0 Prettier :CocCommand prettier.forceFormatDocument
+" enable format-on-save from nvim-lspconfig + ZLS
+" Formatting with ZLS matches `zig fmt`.
+" The Zig FAQ answers some questions about `zig fmt`:
+" https://github.com/ziglang/zig/wiki/FAQ
+autocmd BufWritePre *.zig,*.zon lua vim.lsp.buf.format()
 
-" Use tab for trigger completion with characters ahead and navigate.
-" NOTE: Use command ':verbose imap <tab>' to make sure tab is not mapped by
-" other plugin before putting this into your config.
-" inoremap <silent><expr> <TAB>
-      " \ pumvisible() ? "\<C-n>" :
-      " \ <SID>check_back_space() ? "\<TAB>" :
-      " \ coc#refresh()
-" inoremap <expr><S-TAB> pumvisible() ? "\<C-p>" : "\<C-h>"
-
-function! s:check_back_space() abort
-  let col = col('.') - 1
-  return !col || getline('.')[col - 1]  =~# '\s'
-endfunction
-
-" Use <c-space> to trigger completion.
-if has('nvim')
-  inoremap <silent><expr> <c-space> coc#refresh()
-else
-  inoremap <silent><expr> <c-@> coc#refresh()
-endif
-
-" Make <CR> auto-select the first completion item and notify coc.nvim to
-" format on enter, <cr> could be remapped by other vim plugin
-inoremap <silent><expr> <cr> pumvisible() ? coc#_select_confirm()
-                              \: "\<C-g>u\<CR>\<c-r>=coc#on_enter()\<CR>"
-inoremap <silent><expr> <CR> coc#pum#visible() ? coc#pum#confirm() : "\<CR>"
-
-
-" Use `[g` and `]g` to navigate diagnostics
-" Use `:CocDiagnostics` to get all diagnostics of current buffer in location list.
-nmap <silent> [g <Plug>(coc-diagnostic-prev)
-nmap <silent> ]g <Plug>(coc-diagnostic-next)
-
-" GoTo code navigation.
-nmap <silent> gd <Plug>(coc-definition)
-nmap <silent> gy <Plug>(coc-type-definition)
-nmap <silent> gi <Plug>(coc-implementation)
-nmap <silent> gr <Plug>(coc-references)
-
-" Use K to show documentation in preview window.
-nnoremap <silent> K :call <SID>show_documentation()<CR>
-
-" use Ctrl-j and Ctrl-k to scroll within the typehint window
-nnoremap coc#float#has_scroll() ? coc#float#scroll(1, 1) : "<C-j>"
-nnoremap coc#float#has_scroll() ? coc#float#scroll(0, 1) : "<C-k>"
-
-function! s:show_documentation()
-  if CocAction('hasProvider', 'hover')
-    call CocActionAsync('doHover')
-  else
-    call feedkeys('K', 'in')
-  endif
-endfunction
-
-" Highlight the symbol and its references when holding the cursor.
-autocmd CursorHold * silent call CocActionAsync('highlight')
-
-" Symbol renaming.
-nmap <leader>rn <Plug>(coc-rename)
-
-" Formatting selected code.
-xmap <leader>f  <Plug>(coc-format-selected)
-nmap <leader>f  <Plug>(coc-format-selected)
-
-augroup mygroup
-  autocmd!
-  " Setup formatexpr specified filetype(s).
-  autocmd FileType typescript,json setl formatexpr=CocAction('formatSelected')
-  " Update signature help on jump placeholder.
-  autocmd User CocJumpPlaceholder call CocActionAsync('showSignatureHelp')
-augroup end
-
-" Applying codeAction to the selected region.
-" Example: `<leader>aap` for current paragraph
-xmap <leader>a  <Plug>(coc-codeaction-selected)
-nmap <leader>a  <Plug>(coc-codeaction-selected)
-
-" Remap keys for applying codeAction to the current buffer.
-nmap <leader>ac  <Plug>(coc-codeaction)
-" Apply AutoFix to problem on the current line.
-nmap <leader>qf  <Plug>(coc-fix-current)
-
-" Run the Code Lens action on the current line.
-nmap <leader>cl  <Plug>(coc-codelens-action)
-
-" Map function and class text objects
-" NOTE: Requires 'textDocument.documentSymbol' support from the language server.
-xmap if <Plug>(coc-funcobj-i)
-omap if <Plug>(coc-funcobj-i)
-xmap af <Plug>(coc-funcobj-a)
-omap af <Plug>(coc-funcobj-a)
-xmap ic <Plug>(coc-classobj-i)
-omap ic <Plug>(coc-classobj-i)
-xmap ac <Plug>(coc-classobj-a)
-omap ac <Plug>(coc-classobj-a)
-
-" Remap <C-f> and <C-b> for scroll float windows/popups.
-if has('nvim-0.4.0') || has('patch-8.2.0750')
-  nnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  nnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-  inoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(1)\<cr>" : "\<Right>"
-  inoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? "\<c-r>=coc#float#scroll(0)\<cr>" : "\<Left>"
-  vnoremap <silent><nowait><expr> <C-f> coc#float#has_scroll() ? coc#float#scroll(1) : "\<C-f>"
-  vnoremap <silent><nowait><expr> <C-b> coc#float#has_scroll() ? coc#float#scroll(0) : "\<C-b>"
-endif
-
-" Use CTRL-S for selections ranges.
-" Requires 'textDocument/selectionRange' support of language server.
-nmap <silent> <C-s> <Plug>(coc-range-select)
-xmap <silent> <C-s> <Plug>(coc-range-select)
-
-" Add `:Format` command to format current buffer.
-command! -nargs=0 Format :call CocActionAsync('format')
-
-" Add `:Fold` command to fold current buffer.
-" command! -nargs=? Fold :call     CocAction('fold', <f-args>)
-
-" Add `:OR` command for organize imports of the current buffer.
-command! -nargs=0 OR   :call     CocActionAsync('runCommand', 'editor.action.organizeImport')
-
-" Add (Neo)Vim's native statusline support.
-" NOTE: Please see `:h coc-status` for integrations with external plugins that
-" provide custom statusline: lightline.vim, vim-airline.
-set statusline^=%{coc#status()}%{get(b:,'coc_current_function','')}
-
-" Mappings for CoCList
-" Show all diagnostics.
-nnoremap <silent><nowait> <space>a  :<C-u>CocList diagnostics<cr>
-" Manage extensions.
-nnoremap <silent><nowait> <space>e  :<C-u>CocList extensions<cr>
-" Show commands.
-nnoremap <silent><nowait> <space>c  :<C-u>CocList commands<cr>
-" Find symbol of current document.
-nnoremap <silent><nowait> <space>o  :<C-u>CocList outline<cr>
-" Search workspace symbols.
-nnoremap <silent><nowait> <space>s  :<C-u>CocList -I symbols<cr>
-" Do default action for next item.
-nnoremap <silent><nowait> <space>j  :<C-u>CocNext<CR>
-" Do default action for previous item.
-nnoremap <silent><nowait> <space>k  :<C-u>CocPrev<CR>
-" Resume latest coc list.
-nnoremap <silent><nowait> <space>p  :<C-u>CocListResume<CR>
-
-lua <<EOF
+lua << EOF
+-- nvim-tree.lua
 -- disable netrw at the very start of your init.lua
 vim.g.loaded_netrw = 1
 vim.g.loaded_netrwPlugin = 1
@@ -291,4 +140,155 @@ require("nvim-tree").setup({
     dotfiles = true,
   },
 })
+
+-- Set up nvim-cmp.
+local cmp = require'cmp'
+
+vim.lsp.handlers['textDocument/hover'] = vim.lsp.with(
+  vim.lsp.handlers.hover,
+  { border = 'rounded' }
+)
+
+vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(
+  vim.lsp.handlers.signature_help,
+  { border = 'rounded' }
+)
+
+local map = function(type, key, value)
+	vim.api.nvim_buf_set_keymap(0,type,key,value,{noremap = true, silent = true});
+end
+
+-- NOTE: I could and maybe should gate each of these behind
+-- something like if client.supports_method('textDocument/hover') then
+-- but I'm not going to for now
+
+vim.api.nvim_create_autocmd('LspAttach', {
+  callback = function(client)
+    -- NOTE: also the neovim lsp documentation claims that
+    -- some of these are set by default but they don't seem
+    -- to be for me, and I couldn't figure out why
+    map('n','K','<cmd>lua vim.lsp.buf.hover()<CR>')
+    map('n','gD','<cmd>lua vim.lsp.buf.declaration()<CR>')
+    map('n','gd','<cmd>lua vim.lsp.buf.definition()<CR>')
+    map('n','gr','<cmd>lua vim.lsp.buf.references()<CR>')
+    map('n','gs','<cmd>lua vim.lsp.buf.signature_help()<CR>')
+    map('n','gi','<cmd>lua vim.lsp.buf.implementation()<CR>')
+    map('n','gt','<cmd>lua vim.lsp.buf.type_definition()<CR>')
+    -- map('n','<leader>gw','<cmd>lua vim.lsp.buf.document_symbol()<CR>')
+    -- map('n','<leader>gW','<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
+    -- map('n','<leader>ah','<cmd>lua vim.lsp.buf.hover()<CR>')
+    -- map('n','<leader>af','<cmd>lua vim.lsp.buf.code_action()<CR>')
+    -- map('n','<leader>ee','<cmd>lua vim.lsp.util.show_line_diagnostics()<CR>')
+    -- map('n','<leader>ar','<cmd>lua vim.lsp.buf.rename()<CR>')
+    -- map('n','<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+    -- map('n','<leader>ai','<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
+    -- map('n','<leader>ao','<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
+  end
+})
+
+cmp.setup({
+  snippet = {
+    -- REQUIRED - you must specify a snippet engine
+    expand = function(args)
+      vim.fn["vsnip#anonymous"](args.body) -- For `vsnip` users.
+      -- require('luasnip').lsp_expand(args.body) -- For `luasnip` users.
+      -- require('snippy').expand_snippet(args.body) -- For `snippy` users.
+      -- vim.fn["UltiSnips#Anon"](args.body) -- For `ultisnips` users.
+      -- vim.snippet.expand(args.body) -- For native neovim snippets (Neovim v0.10+)
+    end,
+  },
+
+  window = {
+    completion = cmp.config.window.bordered(),
+    documentation = cmp.config.window.bordered(),
+  },
+
+  mapping = cmp.mapping.preset.insert({
+    ['<C-b>'] = cmp.mapping.scroll_docs(-4),
+    ['<C-f>'] = cmp.mapping.scroll_docs(4),
+    ['<C-Space>'] = cmp.mapping.complete(),
+    ['<C-e>'] = cmp.mapping.abort(),
+     -- Set `select` to `false` to only confirm explicitly selected items.
+     -- i.e. not just accept the first suggestion.
+    ['<CR>'] = cmp.mapping.confirm({ select = false }),
+  }),
+
+  sources = cmp.config.sources({
+    { name = 'nvim_lsp' },
+    { name = 'vsnip' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+
+-- To use git you need to install the plugin petertriho/cmp-git and uncomment lines below
+-- Set configuration for specific filetype.
+--[[ cmp.setup.filetype('gitcommit', {
+  sources = cmp.config.sources({
+    { name = 'git' },
+  }, {
+    { name = 'buffer' },
+  })
+})
+require("cmp_git").setup() ]]--
+
+-- Use buffer source for `/` and `?` (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline({ '/', '?' }, {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = {
+    { name = 'buffer' }
+  }
+})
+
+-- Use cmdline & path source for ':' (if you enabled `native_menu`, this won't work anymore).
+cmp.setup.cmdline(':', {
+  mapping = cmp.mapping.preset.cmdline(),
+  sources = cmp.config.sources({
+    { name = 'path' }
+  }, {
+    { name = 'cmdline' }
+  }),
+  matching = { disallow_symbol_nonprefix_matching = false }
+})
+
+-- Set up lspconfig.
+local lspconfig = require('lspconfig')
+local capabilities = require('cmp_nvim_lsp').default_capabilities()
+
+-- Set default client capabilities so I don't have to add
+-- `capabilities = capabilities` to each server config.
+
+lspconfig.util.default_config = vim.tbl_extend(
+  'force',
+  lspconfig.util.default_config,
+  {
+    capabilities = capabilities,
+  }
+)
+
+lspconfig.zls.setup {
+  -- Server-specific settings. See `:help lspconfig-setup`
+
+  -- omit the following line if `zls` is in your PATH
+  -- cmd = { '/path/to/zls_executable' },
+  -- There are two ways to set config options:
+  --   - edit your `zls.json` that applies to any editor that uses ZLS
+  --   - set in-editor config options with the `settings` field below.
+
+  -- Further information on how to configure ZLS:
+  -- https://zigtools.org/zls/configure/
+  settings = {
+    zls = {
+      -- Whether to enable build-on-save diagnostics
+
+      -- Further information about build-on save:
+      -- https://zigtools.org/zls/guides/build-on-save/
+      -- enable_build_on_save = true,
+
+      -- omit the following line if `zig` is in your PATH
+      -- zig_exe_path = '/path/to/zig_executable'
+    }
+  }
+}
+
 EOF
