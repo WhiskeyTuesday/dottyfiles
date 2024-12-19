@@ -111,4 +111,4 @@ function fish_prompt --description 'Write out the prompt'
 end
 
 # <<< conda initialize <<<
-~/.cargo/bin/mise activate fish | source
+# ~/.cargo/bin/mise activate fish | source
