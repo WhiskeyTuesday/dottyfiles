@@ -9,6 +9,10 @@ Plug 'qpkorr/vim-bufkill', { 'branch': 'master' }
 Plug 'github/copilot.vim' " disabled in favor of zbirenbaum/copilot.lua
 Plug 'mbbill/undotree' " Undo tree
 Plug 'neovim/nvim-lspconfig' " https://github.com/neovim/nvim-lspconfig
+Plug 'nvim-tree/nvim-tree.lua'
+Plug 'nvim-tree/nvim-web-devicons'
+Plug 'nvim-lua/plenary.nvim' " Required for telescope and elixir-tools
+Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
 
 " Themes
 Plug 'Biscuit-Colorscheme/nvim' " Biscuit theme
@@ -35,8 +39,6 @@ Plug 'rescript-lang/vim-rescript'
 Plug 'jparise/vim-graphql' " GraphQL file detection, syntax hl, and indenting
 Plug 'othree/html5.vim'
 Plug 'leafOfTree/vim-svelte-plugin'
-Plug 'nvim-tree/nvim-tree.lua'
-Plug 'nvim-tree/nvim-web-devicons'
 Plug 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
 call plug#end()
 
@@ -138,6 +140,12 @@ if has("nvim-0.5.0") || has("patch-8.1.1564")
 else
   set signcolumn=yes
 endif
+
+" Telescope
+nnoremap <leader>ff <cmd>Telescope find_files<cr>
+nnoremap <leader>fg <cmd>Telescope live_grep<cr>
+nnoremap <leader>fb <cmd>Telescope buffers<cr>
+nnoremap <leader>fh <cmd>Telescope help_tags<cr>
 
 " Custom functionality
 function! ToggleNvimTree()
