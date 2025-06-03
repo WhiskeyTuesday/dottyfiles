@@ -13,6 +13,7 @@ Plug 'nvim-tree/nvim-tree.lua'
 Plug 'nvim-tree/nvim-web-devicons'
 Plug 'nvim-lua/plenary.nvim' " Required for telescope and elixir-tools
 Plug 'nvim-telescope/telescope.nvim', { 'tag': '0.1.8' }
+Plug 'nvim-treesitter/nvim-treesitter', {'do': ':TSUpdate'} " Finally had to get TS
 
 " Themes
 Plug 'Biscuit-Colorscheme/nvim' " Biscuit theme
@@ -117,6 +118,7 @@ set history=1000 " MOAR UNDO LEVELS!
 set tabstop=2 " Show tabs as 2-space indentation
 set shiftwidth=2 expandtab " 'soft tabbing' - Hit TAB but GET 2 spaces
 set foldopen -=hor " stop opening folds when I hit 'L'
+set nowrap " no line wrapping by default
 
 " Set internal encoding of vim, not needed on neovim, since coc.nvim uses some
 " unicode characters in the file autoload/float.vim
