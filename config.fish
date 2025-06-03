@@ -25,10 +25,10 @@ alias nos 'nordvpn status'
 alias nod 'nordvpn disconnect'
 
 alias b 'bat'
-
 alias fd 'fdfind'
 
 # PATH variables
+set PATH $HOME/bin $PATH # Unmanaged local binaries before all else
 set PATH /usr/local/bin $PATH # Unmanaged local binaries before all else
 set ANDROID_HOME $HOME/Android/Sdk
 set JAVA_HOME $HOME/android-studio/jre
@@ -36,8 +36,6 @@ set PATH $PATH $ANDROID_HOME/emulator
 set PATH $PATH $ANDROID_HOME/tools
 set PATH $PATH $ANDROID_HOME/tools/bin
 set PATH $PATH $ANDROID_HOME/platform-tools
-set PATH $PATH $HOME/.local/share/bob/nvim-bin
-set PATH $PATH $HOME/.dotnet/tools # .NET Core Global Tools
 
 # Fish settings
 set fish_key_bindings fish_vi_key_bindings
@@ -50,23 +48,6 @@ end
 
 if test -e ~/.secretconf.fish
   source ~/.secretconf.fish
-end
-
-set -x N_PREFIX "$HOME/n"; contains "$N_PREFIX/bin" $PATH; or set -a PATH "$N_PREFIX/bin"  # Added by n-install (see http://git.io/n-install-repo).
-
-eval (/home/linuxbrew/.linuxbrew/bin/brew shellenv)
-
-# pnpm
-set -gx PNPM_HOME "/home/ers/.local/share/pnpm"
-if not string match -q -- $PNPM_HOME $PATH
-  set -gx PATH "$PNPM_HOME" $PATH
-end
-# pnpm end
-
-# >>> conda initialize >>>
-# !! Contents within this block are managed by 'conda init' !!
-if test -f /home/ers/anaconda3/bin/conda
-    eval /home/ers/anaconda3/bin/conda "shell.fish" "hook" $argv | source
 end
 
 # Set the prompt
@@ -109,6 +90,3 @@ function fish_prompt --description 'Write out the prompt'
 
   echo -n -s (prompt_login)' ' (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal " "$prompt_status $suffix " "
 end
-
-# <<< conda initialize <<<
-# ~/.cargo/bin/mise activate fish | source
