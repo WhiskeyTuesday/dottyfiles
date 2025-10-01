@@ -57,11 +57,11 @@ vim.api.nvim_create_autocmd('LspAttach', {
   map('n','gt','<cmd>lua vim.lsp.buf.type_definition()<CR>')
   -- map('n','<leader>gw','<cmd>lua vim.lsp.buf.document_symbol()<CR>')
   -- map('n','<leader>gW','<cmd>lua vim.lsp.buf.workspace_symbol()<CR>')
-  -- map('n','<leader>ah','<cmd>lua vim.lsp.buf.hover()<CR>')
+  map('n','<leader>ah','<cmd>lua vim.lsp.buf.hover()<CR>')
   -- map('n','<leader>af','<cmd>lua vim.lsp.buf.code_action()<CR>')
   map('n','<leader>ee','<cmd>lua vim.diagnostic.open_float()<CR>')
   -- map('n','<leader>ar','<cmd>lua vim.lsp.buf.rename()<CR>')
-  -- map('n','<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>')
+  map('n','<leader>=', '<cmd>lua vim.lsp.buf.formatting()<CR>')
   -- map('n','<leader>ai','<cmd>lua vim.lsp.buf.incoming_calls()<CR>')
   -- map('n','<leader>ao','<cmd>lua vim.lsp.buf.outgoing_calls()<CR>')
   end
@@ -91,7 +91,7 @@ mapping = cmp.mapping.preset.insert({
   ['<C-e>'] = cmp.mapping.abort(),
   -- Set `select` to `false` to only confirm explicitly selected items.
   -- i.e. not just accept the first suggestion.
-  ['<CR>'] = cmp.mapping.confirm({ select = false }),
+  ['<CR>'] = cmp.mapping.confirm({ select = true }),
 }),
 
 sources = cmp.config.sources({
@@ -211,13 +211,15 @@ local function setup_node_process(client)
   end
 end
 
--- TypeScript/JavaScript LSP
 lspconfig.ts_ls.setup {
+  -- this seems dumb, why are we falling back to the same command? TODO
   cmd = get_cmd_with_fallback("typescript-language-server", "typescript-language-server"),
   on_init = setup_node_process,
+
   before_init = function(params)
     params.processId = vim.NIL
   end,
+
   settings = {
     javascript = {
       inlayHints = {
@@ -230,6 +232,7 @@ lspconfig.ts_ls.setup {
         includeInlayEnumMemberValueHints = true,
       }
     },
+
     typescript = {
       inlayHints = {
         includeInlayParameterNameHints = 'all',
@@ -250,6 +253,7 @@ lspconfig.eslint.setup {
   cmd = { "pnpm", "exec", "vscode-eslint-language-server", "--stdio" },
   -- Use the same root_dir logic that ts_ls is successfully using
   root_dir = lspconfig.util.find_package_json_ancestor,
+
   settings = {
     workingDirectory = { mode = "auto" },
     format = true,
@@ -259,6 +263,7 @@ lspconfig.eslint.setup {
     run = "onType",
     workingDirectories = { mode = "auto" }
   },
+
   handlers = {
     -- Add handlers to debug attachment issues
     ["window/showMessageRequest"] = function(_, result, params)

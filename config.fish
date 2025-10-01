@@ -29,6 +29,7 @@ alias fd 'fdfind'
 
 # PATH variables
 set PATH $HOME/bin $PATH # Unmanaged local binaries before all else
+set PATH $HOME/.local/bin $PATH # Unmanaged local binaries before all else
 set PATH /usr/local/bin $PATH # Unmanaged local binaries before all else
 set ANDROID_HOME $HOME/Android/Sdk
 set JAVA_HOME $HOME/android-studio/jre
@@ -90,3 +91,10 @@ function fish_prompt --description 'Write out the prompt'
 
   echo -n -s (prompt_login)' ' (set_color $color_cwd) (prompt_pwd) $normal (fish_vcs_prompt) $normal " "$prompt_status $suffix " "
 end
+
+# pnpm
+set -gx PNPM_HOME "/home/ers/.local/share/pnpm"
+if not string match -q -- $PNPM_HOME $PATH
+  set -gx PATH "$PNPM_HOME" $PATH
+end
+# pnpm end

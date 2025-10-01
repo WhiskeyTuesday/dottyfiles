@@ -41,6 +41,10 @@ Plug 'jparise/vim-graphql' " GraphQL file detection, syntax hl, and indenting
 Plug 'othree/html5.vim'
 Plug 'leafOfTree/vim-svelte-plugin'
 Plug 'sevko/vim-nand2tetris-syntax' " NAND2Tetris
+
+Plug 'Bakudankun/PICO-8.vim', { 'branch': 'main' } " PICO-8 syntax highlighting
+Plug 'ssteinbach/vim-pico8-syntax'
+Plug 'markbahnman/vim-pico8-color', { 'branch': 'master' } " PICO-8 colorscheme
 call plug#end()
 
 runtime airlinecycle.vim " Cycle through airline themes
@@ -85,7 +89,7 @@ let g:everforest_background = 'soft'
 let g:gruvbox_material_enable_italic = 1
 let g:gruvbox_material_background = 'soft'
 
-colorscheme gruvbox-material
+colorscheme everforest
 
 try
   AirlineTheme zenburn
@@ -97,7 +101,7 @@ catch
 endtry
 
 " font/typeface (for GUIs, neovide in my case)
-set guifont=FantasqueSansM\ Nerd\ Font:h13 " curly k master race
+set guifont=FantasqueSansM\ Nerd\ Font:h14 " curly k master race
 
 " Vim-Airline options
 let g:airline_powerline_fonts = 1
@@ -132,10 +136,12 @@ set nobackup
 set nowritebackup
 
 " Don't pass messages to |ins-completion-menu|.
+" I think this may be unnecessary now TODO check/remove
 set shortmess+=c
 
 " Always show the signcolumn, otherwise it would shift the text each time
 " diagnostics appear/become resolved.
+" I think this may be unnecessary now TODO check/remove
 if has("nvim-0.5.0") || has("patch-8.1.1564")
   " Recently vim can merge signcolumn and number column into one
   set signcolumn=number
